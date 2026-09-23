@@ -1,5 +1,12 @@
 # WorldAI —— 端到端可运行的 RAG 知识库 + ReAct 工具智能体系统
 
+<p align="center">
+  <a href="https://github.com/CJX0712/worldai-stack-4d9b99c2/actions/workflows/ci.yml"><img src="https://github.com/CJX0712/worldai-stack-4d9b99c2/actions/workflows/ci.yml/badge.svg" alt="ci"></a>
+  <a href="https://github.com/CJX0712/worldai-stack-4d9b99c2/releases"><img src="https://img.shields.io/github/v/release/CJX0712/worldai-stack-4d9b99c2?sort=semver" alt="release"></a>
+  <a href="https://github.com/CJX0712/worldai-stack-4d9b99c2/blob/master/LICENSE"><img src="https://img.shields.io/github/license/CJX0712/worldai-stack-4d9b99c2" alt="license"></a>
+  <img src="https://img.shields.io/badge/author-%E6%99%A8%E6%98%9F-1f6feb" alt="author">
+</p>
+
 > 复用业界领先开源成果、按单一职责 + Protocol 注入划分的模块化 AI 系统。
 > 默认零依赖真实实现，**无需 GPU / 模型 / API Key / 网络**即可一键复现并全绿验证。
 > 生产实现（FastEmbed / FAISS / Rank-BM25 / llama.cpp / Ollama）经环境变量一键切换。
