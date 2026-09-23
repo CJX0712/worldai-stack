@@ -1,0 +1,316 @@
+openapi: 3.1.0
+info:
+  title: WorldAI
+  version: 1.0.0
+paths:
+  /health:
+    get:
+      summary: 健康检查
+      operationId: health_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /ingest:
+    post:
+      summary: 摄入文档
+      operationId: ingest_ingest_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /query:
+    post:
+      summary: RAG 直接问答
+      operationId: query_query_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /agent:
+    post:
+      summary: ReAct 智能体问答
+      operationId: agent_agent_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AgentRequest:
+      properties:
+        task:
+          type: string
+          title: Task
+        top_k:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Top K
+      type: object
+      required:
+      - task
+      title: AgentRequest
+    AgentResponse:
+      properties:
+        answer:
+          type: string
+          title: Answer
+        used_tools:
+          items:
+            type: string
+          type: array
+          title: Used Tools
+        retrieved_chunk_ids:
+          items:
+            type: string
+          type: array
+          title: Retrieved Chunk Ids
+        steps:
+          items:
+            $ref: '#/components/schemas/StepItem'
+          type: array
+          title: Steps
+      type: object
+      required:
+      - answer
+      - used_tools
+      - retrieved_chunk_ids
+      - steps
+      title: AgentResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HealthModuleInfo:
+      properties:
+        embedder:
+          type: string
+          title: Embedder
+        vector_store:
+          type: string
+          title: Vector Store
+        sparse:
+          type: string
+          title: Sparse
+        reranker:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reranker
+        llm:
+          type: string
+          title: Llm
+      type: object
+      required:
+      - embedder
+      - vector_store
+      - sparse
+      - reranker
+      - llm
+      title: HealthModuleInfo
+    HealthResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+          default: ok
+        version:
+          type: string
+          title: Version
+          default: 1.0.0
+        modules:
+          $ref: '#/components/schemas/HealthModuleInfo'
+      type: object
+      required:
+      - modules
+      title: HealthResponse
+    HitItem:
+      properties:
+        doc_id:
+          type: string
+          title: Doc Id
+        chunk_id:
+          type: string
+          title: Chunk Id
+        score:
+          type: number
+          title: Score
+        text:
+          type: string
+          title: Text
+      type: object
+      required:
+      - doc_id
+      - chunk_id
+      - score
+      - text
+      title: HitItem
+    IngestRequest:
+      properties:
+        doc_id:
+          type: string
+          title: Doc Id
+        title:
+          type: string
+          title: Title
+        source:
+          type: string
+          title: Source
+          default: ''
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+      type: object
+      required:
+      - doc_id
+      - title
+      title: IngestRequest
+    IngestResponse:
+      properties:
+        doc_id:
+          type: string
+          title: Doc Id
+        title:
+          type: string
+          title: Title
+        num_chunks:
+          type: integer
+          title: Num Chunks
+      type: object
+      required:
+      - doc_id
+      - title
+      - num_chunks
+      title: IngestResponse
+    QueryRequest:
+      properties:
+        question:
+          type: string
+          title: Question
+        top_k:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Top K
+      type: object
+      required:
+      - question
+      title: QueryRequest
+    QueryResponse:
+      properties:
+        answer:
+          type: string
+          title: Answer
+        hits:
+          items:
+            $ref: '#/components/schemas/HitItem'
+          type: array
+          title: Hits
+      type: object
+      required:
+      - answer
+      - hits
+      title: QueryResponse
+    StepItem:
+      properties:
+        thought:
+          type: string
+          title: Thought
+        action:
+          type: string
+          title: Action
+        action_input:
+          type: string
+          title: Action Input
+        observation:
+          type: string
+          title: Observation
+      type: object
+      required:
+      - thought
+      - action
+      - action_input
+      - observation
+      title: StepItem
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

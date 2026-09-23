@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "worldai"
+version = "1.0.0"
+description = "端到端可运行的 RAG 知识库 + ReAct 工具智能体系统（模块化 / Protocol 注入 / 零依赖可复现）"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "晨星" }]
+keywords = ["ai", "rag", "agent", "retrieval", "llm"]
+
+[project.urls]
+Homepage = "https://github.com/CJX0712/worldai-stack"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
