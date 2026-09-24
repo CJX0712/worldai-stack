@@ -1,9 +1,9 @@
 # WorldAI —— 端到端可运行的 RAG 知识库 + ReAct 工具智能体系统
 
 <p align="center">
-  <a href="https://github.com/CJX0712/worldai-stack-4d9b99c2/actions/workflows/ci.yml"><img src="https://github.com/CJX0712/worldai-stack-4d9b99c2/actions/workflows/ci.yml/badge.svg" alt="ci"></a>
-  <a href="https://github.com/CJX0712/worldai-stack-4d9b99c2/releases"><img src="https://img.shields.io/github/v/release/CJX0712/worldai-stack-4d9b99c2?sort=semver" alt="release"></a>
-  <a href="https://github.com/CJX0712/worldai-stack-4d9b99c2/blob/master/LICENSE"><img src="https://img.shields.io/github/license/CJX0712/worldai-stack-4d9b99c2" alt="license"></a>
+  <a href="https://github.com/CJX0712/worldai-stack/actions/workflows/ci.yml"><img src="https://github.com/CJX0712/worldai-stack/actions/workflows/ci.yml/badge.svg" alt="ci"></a>
+  <a href="https://github.com/CJX0712/worldai-stack/releases"><img src="https://img.shields.io/github/v/release/CJX0712/worldai-stack?sort=semver" alt="release"></a>
+  <a href="https://github.com/CJX0712/worldai-stack/blob/master/LICENSE"><img src="https://img.shields.io/github/license/CJX0712/worldai-stack" alt="license"></a>
   <img src="https://img.shields.io/badge/author-%E6%99%A8%E6%98%9F-1f6feb" alt="author">
 </p>
 
