@@ -3,11 +3,11 @@ fastapi==0.141.1
 uvicorn==0.53.0
 pydantic==2.13.5
 httpx==0.28.1
-faiss-cpu==1.15.0
+faiss-cpu==1.15.1
 fastembed==0.8.0
-llama_cpp_python==0.3.19
+llama_cpp_python==0.3.35
 rank-bm25==0.2.2
-pypdf==6.18.1
+pypdf==6.19.0
 loguru==0.7.3
 numpy==2.5.3
 onnxruntime==1.30.0
