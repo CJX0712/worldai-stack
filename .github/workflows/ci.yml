@@ -46,6 +46,12 @@ jobs:
           python -m pip install pytest || echo "::warning::pytest install failed (advisory)"
 
       - name: Unit tests
+        env:
+          # 本仓库是 src/ 布局（pyproject 里 package-dir = src），`import worldai`
+          # 在干净 checkout 里解析不到——tests/*.py 全部按 `from worldai.x import y`
+          # 导入，于是整批用例在收集阶段 ModuleNotFoundError。
+          # scripts/verify.py 的第 3 阶段自己就设了 PYTHONPATH=SRC，CI 这一步漏了。
+          PYTHONPATH: src
         run: |
           if [ -d tests ]; then
             python -m pytest tests -q
