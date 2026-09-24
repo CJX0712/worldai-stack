@@ -1,4 +1,4 @@
 # 开发 / 验证工具依赖（运行 scripts/verify.py 与 pytest 所需）
 # 干净环境一键安装：pip install -r requirements-dev.txt
-pytest==8.4.2
+pytest==9.1.1
 pytest-asyncio==1.2.0
